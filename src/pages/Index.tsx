@@ -5,7 +5,7 @@ import Hero from '@/components/Hero';
 import ProductGrid from '@/components/ProductGrid';
 import Footer from '@/components/Footer';
 import { products, getProductsByCategory } from '@/data/products';
-import { Fist, Award, Shield, Zap } from 'lucide-react';
+import { Hand, Award, Shield, Zap } from 'lucide-react';
 
 const Index = () => {
   // Get products by category
@@ -86,7 +86,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
               {
-                icon: <Fist className="w-10 h-10 text-impacto-red" />,
+                icon: <Hand className="w-10 h-10 text-impacto-red" />,
                 title: "Calidad Superior",
                 description: "Utilizamos materiales de primera calidad y procesos de fabricación rigurosos para garantizar productos duraderos."
               },
