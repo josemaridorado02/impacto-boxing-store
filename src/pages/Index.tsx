@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ProductGrid from '@/components/ProductGrid';
 import Footer from '@/components/Footer';
+import BrandIdentity from '@/components/BrandIdentity';
 import { products, getProductsByCategory } from '@/data/products';
 import { Hand, Award, Shield, Zap } from 'lucide-react';
 
@@ -36,6 +37,9 @@ const Index = () => {
     <div className="min-h-screen bg-impacto-white">
       <Navbar />
       <Hero />
+
+      {/* Brand Identity Section */}
+      <BrandIdentity />
 
       {/* Gloves Section */}
       <ProductGrid 
