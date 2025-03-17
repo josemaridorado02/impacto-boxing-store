@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom colors for Impacto Boxing
+				impacto: {
+					red: '#E63946',
+					white: '#F1FAEE',
+					yellow: '#FFD700',
+					light: '#F8F9FA',
+					dark: '#212529',
+					gray: '#E5E5E5'
 				}
 			},
 			borderRadius: {
@@ -84,11 +94,45 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
+				'fade-up': {
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' }
+				},
+				'scale-in': {
+					'0%': { transform: 'scale(0.9)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
+				},
+				'spin-slow': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
+				},
+				'slide-in-right': {
+					'0%': { transform: 'translateX(100%)', opacity: '0' },
+					'100%': { transform: 'translateX(0)', opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.6s ease-out',
+				'fade-up': 'fade-up 0.8s ease-out',
+				'pulse-slow': 'pulse-slow 3s infinite',
+				'scale-in': 'scale-in 0.3s ease-out',
+				'spin-slow': 'spin-slow 8s linear infinite',
+				'slide-in-right': 'slide-in-right 0.5s ease-out'
+			},
+			fontFamily: {
+				sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+				display: ['Space Grotesk', 'sans-serif']
 			}
 		}
 	},
