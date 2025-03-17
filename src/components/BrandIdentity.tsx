@@ -21,8 +21,12 @@ const BrandIdentity: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-impacto-red via-impacto-yellow to-impacto-red rounded-full opacity-20 animate-spin-slow"></div>
             <div className="bg-impacto-dark rounded-full p-4 z-10 border-4 border-impacto-red shadow-lg">
               <div className="bg-impacto-dark rounded-full p-8 flex items-center justify-center relative">
-                <span className="font-display text-5xl font-bold tracking-tighter text-white">I</span>
-                <span className="absolute -right-1 -bottom-1 font-display text-3xl font-bold tracking-tighter text-impacto-yellow">B</span>
+                <div className="relative flex items-center justify-center">
+                  <span className="font-display text-6xl font-bold tracking-tighter text-white">I</span>
+                  <span className="absolute -right-4 -bottom-2 font-display text-4xl font-bold tracking-tighter text-impacto-yellow">B</span>
+                  <div className="absolute -left-1 top-1 w-8 h-8 border-t-4 border-l-4 border-impacto-red rounded-tl-lg"></div>
+                  <div className="absolute -right-1 bottom-1 w-8 h-8 border-b-4 border-r-4 border-impacto-yellow rounded-br-lg"></div>
+                </div>
               </div>
             </div>
           </div>
