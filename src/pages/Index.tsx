@@ -5,6 +5,7 @@ import Hero from '@/components/Hero';
 import ProductGrid from '@/components/ProductGrid';
 import Footer from '@/components/Footer';
 import BrandIdentity from '@/components/BrandIdentity';
+import RadioAdvertisement from '@/components/RadioAdvertisement';
 import { products, getProductsByCategory } from '@/data/products';
 import { Hand, Award, Shield, Zap } from 'lucide-react';
 
@@ -47,6 +48,9 @@ const Index = () => {
         title="Guantes de Boxeo" 
         id="gloves" 
       />
+
+      {/* Radio Advertisement Section */}
+      <RadioAdvertisement />
 
       {/* About Section */}
       <section id="about" className="py-20 bg-impacto-light">

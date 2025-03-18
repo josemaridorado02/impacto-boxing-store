@@ -53,6 +53,9 @@ const Navbar: React.FC = () => {
           <a href="#apparel" className="text-impacto-dark hover:text-impacto-red font-medium transition-colors">
             Ropa
           </a>
+          <a href="#radio-ad" className="text-impacto-dark hover:text-impacto-red font-medium transition-colors">
+            Radio
+          </a>
           <a href="#about" className="text-impacto-dark hover:text-impacto-red font-medium transition-colors">
             Nosotros
           </a>
@@ -112,6 +115,13 @@ const Navbar: React.FC = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Ropa
+          </a>
+          <a 
+            href="#radio-ad" 
+            className="text-xl font-medium text-impacto-dark"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Radio
           </a>
           <a 
             href="#about" 
