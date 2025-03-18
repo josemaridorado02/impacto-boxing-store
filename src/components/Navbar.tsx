@@ -30,6 +30,13 @@ const Navbar: React.FC = () => {
           href="#" 
           className="flex items-center"
         >
+          <div className="h-10 w-10 mr-2">
+            <img 
+              src="/lovable-uploads/72e2d150-673e-42df-8cb0-1b97865f1230.png" 
+              alt="Impacto Boxing Logo" 
+              className="h-full object-contain"
+            />
+          </div>
           <span className="font-display font-bold text-2xl text-impacto-red">
             IMPACTO
           </span>

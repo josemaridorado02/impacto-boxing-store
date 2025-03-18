@@ -20,44 +20,12 @@ const BrandIdentity: React.FC = () => {
           <div className="relative w-64 h-64 flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-impacto-red via-impacto-yellow to-impacto-red rounded-full opacity-20 animate-spin-slow"></div>
             <div className="bg-impacto-dark rounded-full p-4 z-10 border-4 border-impacto-red shadow-lg">
-              <div className="bg-impacto-dark rounded-full p-6 flex items-center justify-center relative">
-                {/* Boxing Gloves Logo */}
-                <div className="relative w-full h-full">
-                  {/* Left Glove */}
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 transform -rotate-12">
-                    <div className="w-14 h-16 bg-impacto-red rounded-xl shadow-lg border-2 border-impacto-yellow flex items-center justify-center relative">
-                      {/* Glove cuff */}
-                      <div className="absolute bottom-0 left-0 right-0 h-4 bg-impacto-yellow rounded-b-lg border-t-2 border-black"></div>
-                      {/* Thumb */}
-                      <div className="absolute -right-2 top-3 w-4 h-6 bg-impacto-red rounded-full border-2 border-impacto-yellow"></div>
-                      {/* Stitching details */}
-                      <div className="absolute top-2 left-2 w-6 h-1 bg-black rounded-full"></div>
-                      <div className="absolute top-5 left-2 w-6 h-1 bg-black rounded-full"></div>
-                    </div>
-                  </div>
-                  
-                  {/* Right Glove */}
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 transform rotate-12">
-                    <div className="w-14 h-16 bg-impacto-black rounded-xl shadow-lg border-2 border-impacto-yellow flex items-center justify-center relative">
-                      {/* Glove cuff */}
-                      <div className="absolute bottom-0 left-0 right-0 h-4 bg-impacto-yellow rounded-b-lg border-t-2 border-black"></div>
-                      {/* Thumb */}
-                      <div className="absolute -left-2 top-3 w-4 h-6 bg-impacto-black rounded-full border-2 border-impacto-yellow"></div>
-                      {/* Stitching details */}
-                      <div className="absolute top-2 right-2 w-6 h-1 bg-impacto-red rounded-full"></div>
-                      <div className="absolute top-5 right-2 w-6 h-1 bg-impacto-red rounded-full"></div>
-                    </div>
-                  </div>
-                  
-                  {/* Center Text */}
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -mt-3">
-                    <span className="font-display text-2xl font-bold text-impacto-yellow">IB</span>
-                  </div>
-                </div>
-                
-                {/* Corner decorations */}
-                <div className="absolute -left-1 top-1 w-8 h-8 border-t-4 border-l-4 border-impacto-red rounded-tl-lg"></div>
-                <div className="absolute -right-1 bottom-1 w-8 h-8 border-b-4 border-r-4 border-impacto-yellow rounded-br-lg"></div>
+              <div className="bg-impacto-dark rounded-full p-6 flex items-center justify-center relative overflow-hidden">
+                <img 
+                  src="/lovable-uploads/72e2d150-673e-42df-8cb0-1b97865f1230.png" 
+                  alt="Impacto Boxing Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
             </div>
           </div>
@@ -71,8 +39,8 @@ const BrandIdentity: React.FC = () => {
             </p>
             <p className="text-gray-300">
               Un diseño que representa fuerza, determinación y excelencia. 
-              Los guantes de boxeo simbolizan nuestra pasión por este deporte y nuestro compromiso
-              con la calidad en cada producto que ofrecemos.
+              El logo con guantes de boxeo colgando de una cadena simboliza nuestra pasión por este deporte
+              y nuestro compromiso con la calidad en cada producto que ofrecemos.
             </p>
           </div>
         </div>
