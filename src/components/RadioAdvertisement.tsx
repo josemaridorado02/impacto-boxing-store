@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, ExternalLink } from 'lucide-react';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
 import { Skeleton } from './ui/skeleton';
@@ -13,13 +13,16 @@ const RadioAdvertisement: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
+  
+  // Direct audio URL
+  const audioUrl = "https://soundcloud.com/alberto-roman-garcia-893427995/anuncio-radio";
+  
   useEffect(() => {
     // Create audio element when component mounts
     audioRef.current = new Audio();
     
     // Set the direct audio URL
-    audioRef.current.src = "https://soundcloud.com/alberto-roman-garcia-893427995/anuncio-radio";
+    audioRef.current.src = audioUrl;
     
     // Add event listeners
     audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
@@ -168,8 +171,21 @@ const RadioAdvertisement: React.FC = () => {
                 </Button>
               </div>
 
-              <div className="w-full">
+              <div className="w-full mb-4">
                 <Progress value={progress} className="h-2 bg-gray-200" />
+              </div>
+
+              {/* Direct link to audio */}
+              <div className="text-center mt-4">
+                <a 
+                  href={audioUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-impacto-red hover:text-impacto-red/80 text-sm font-medium"
+                >
+                  Escuchar directamente en SoundCloud
+                  <ExternalLink className="ml-1" size={14} />
+                </a>
               </div>
             </>
           )}
