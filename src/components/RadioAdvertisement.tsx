@@ -1,114 +1,23 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, ExternalLink } from 'lucide-react';
-import { Button } from './ui/button';
-import { Progress } from './ui/progress';
-import { Skeleton } from './ui/skeleton';
-import { toast } from './ui/use-toast';
+import { ExternalLink } from 'lucide-react';
+import { Alert, AlertTitle, AlertDescription } from './ui/alert';
 
 const RadioAdvertisement: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [isMuted, setIsMuted] = useState(false);
+  // SoundCloud URL
+  const soundcloudUrl = "https://soundcloud.com/alberto-roman-garcia-893427995/anuncio-radio";
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   
-  // Direct audio URL
-  const audioUrl = "https://soundcloud.com/alberto-roman-garcia-893427995/anuncio-radio";
-  
-  useEffect(() => {
-    // Create audio element when component mounts
-    audioRef.current = new Audio();
-    
-    // Set the direct audio URL
-    audioRef.current.src = audioUrl;
-    
-    // Add event listeners
-    audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
-    audioRef.current.addEventListener('ended', handleEnded);
-    audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
-    audioRef.current.addEventListener('error', handleError);
-    
-    // Preload the audio
-    audioRef.current.load();
-    
-    // Log for debugging
-    console.log("Audio element created with source:", audioRef.current.src);
-    
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
-        audioRef.current.removeEventListener('ended', handleEnded);
-        audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
-        audioRef.current.removeEventListener('error', handleError);
-      }
-    };
-  }, []);
-
-  const togglePlayPause = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        // Try to play and handle any errors
-        const playPromise = audioRef.current.play();
-        
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              console.log("Audio playback started successfully");
-              setIsPlaying(true);
-            })
-            .catch(error => {
-              console.error("Audio playback error:", error);
-              toast({
-                title: "Error al reproducir",
-                description: "No se pudo reproducir el audio. Intente nuevamente.",
-                variant: "destructive"
-              });
-              setError("Error al reproducir el audio");
-            });
-        }
-      }
-    }
-  };
-
-  const toggleMute = () => {
-    if (audioRef.current) {
-      audioRef.current.muted = !audioRef.current.muted;
-      setIsMuted(!isMuted);
-    }
-  };
-
-  const handleTimeUpdate = () => {
-    if (audioRef.current) {
-      const percentage = (audioRef.current.currentTime / audioRef.current.duration) * 100;
-      setProgress(percentage);
-    }
-  };
-
-  const handleEnded = () => {
-    setIsPlaying(false);
-    setProgress(0);
-  };
-
-  const handleCanPlayThrough = () => {
-    console.log("Audio can play through");
+  // Handle iframe load event
+  const handleIframeLoad = () => {
     setIsLoading(false);
   };
 
-  const handleError = (e: Event) => {
-    console.error("Audio error:", e);
-    setError("Error al cargar el audio");
+  // Handle iframe error
+  const handleIframeError = () => {
+    setError("No se pudo cargar el reproductor de SoundCloud");
     setIsLoading(false);
-    toast({
-      title: "Error",
-      description: "No se pudo cargar el archivo de audio.",
-      variant: "destructive"
-    });
   };
 
   return (
@@ -128,67 +37,41 @@ const RadioAdvertisement: React.FC = () => {
 
         <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
           {error ? (
-            <div className="text-center p-4 text-red-500">
-              <p>{error}</p>
-              <Button 
-                onClick={() => window.location.reload()} 
-                className="mt-2 bg-impacto-red hover:bg-impacto-red/90"
-              >
-                Reintentar
-              </Button>
-            </div>
-          ) : (
-            <>
-              <div className="flex items-center gap-4 mb-3">
-                <Button 
-                  onClick={togglePlayPause} 
-                  variant="outline" 
-                  size="icon" 
-                  className="h-10 w-10 rounded-full bg-impacto-red hover:bg-impacto-red/90 border-none text-white"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <Skeleton className="h-5 w-5 rounded-full" />
-                  ) : isPlaying ? (
-                    <Pause size={18} />
-                  ) : (
-                    <Play size={18} />
-                  )}
-                </Button>
-                
-                <div className="flex-1">
-                  <h3 className="font-bold text-lg">Impacto Boxing - Anuncio Oficial</h3>
-                  <p className="text-sm text-gray-500">Descubre el poder de Impacto</p>
-                </div>
-                
-                <Button
-                  onClick={toggleMute}
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 text-gray-500"
-                >
-                  {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                </Button>
-              </div>
+            <Alert variant="destructive" className="mb-4">
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>
+                {error}. Por favor, intente acceder directamente al enlace de abajo.
+              </AlertDescription>
+            </Alert>
+          ) : null}
 
-              <div className="w-full mb-4">
-                <Progress value={progress} className="h-2 bg-gray-200" />
-              </div>
+          {/* SoundCloud Embed */}
+          <div className="relative aspect-[4/3] w-full mb-4">
+            <iframe 
+              width="100%" 
+              height="100%" 
+              scrolling="no" 
+              frameBorder="no" 
+              allow="autoplay"
+              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(soundcloudUrl)}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}
+              onLoad={handleIframeLoad}
+              onError={handleIframeError}
+              className="absolute inset-0 w-full h-full rounded-md"
+            ></iframe>
+          </div>
 
-              {/* Direct link to audio */}
-              <div className="text-center mt-4">
-                <a 
-                  href={audioUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-impacto-red hover:text-impacto-red/80 text-sm font-medium"
-                >
-                  Escuchar directamente en SoundCloud
-                  <ExternalLink className="ml-1" size={14} />
-                </a>
-              </div>
-            </>
-          )}
+          {/* Direct link to SoundCloud */}
+          <div className="text-center mt-4">
+            <a 
+              href={soundcloudUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-impacto-red hover:text-impacto-red/80 text-sm font-medium"
+            >
+              Escuchar directamente en SoundCloud
+              <ExternalLink className="ml-1" size={14} />
+            </a>
+          </div>
         </div>
       </div>
     </section>
