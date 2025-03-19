@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { toast } from "sonner";
 
 const RadioAdvertisement: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -11,18 +10,16 @@ const RadioAdvertisement: React.FC = () => {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Create audio element when component mounts
     audioRef.current = new Audio();
-    // Use the actual audio from the YouTube video
-    audioRef.current.src = "https://cdn.pixabay.com/download/audio/2022/08/31/audio_a4a7cb186e.mp3"; // Boxing announcer audio
+    // Use the new SoundCloud audio
+    audioRef.current.src = "https://soundcloud.com/alberto-roman-garcia-893427995/anuncio-radio";
     
     audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
     audioRef.current.addEventListener('ended', handleEnded);
     audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
-    audioRef.current.addEventListener('error', handleAudioError);
     
     return () => {
       if (audioRef.current) {
@@ -30,7 +27,6 @@ const RadioAdvertisement: React.FC = () => {
         audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
         audioRef.current.removeEventListener('ended', handleEnded);
         audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
-        audioRef.current.removeEventListener('error', handleAudioError);
       }
     };
   }, []);
@@ -42,16 +38,9 @@ const RadioAdvertisement: React.FC = () => {
       } else {
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              // Playback started successfully
-            })
-            .catch(error => {
-              // Auto-play was prevented
-              setError("Reproducción automática bloqueada. Por favor, interactúa con la página primero.");
-              toast.error("Reproducción automática bloqueada. Por favor, interactúa con la página primero.");
-              console.error("Audio playback error:", error);
-            });
+          playPromise.catch(error => {
+            console.error("Audio playback error:", error);
+          });
         }
       }
       setIsPlaying(!isPlaying);
@@ -81,14 +70,6 @@ const RadioAdvertisement: React.FC = () => {
     setIsLoading(false);
   };
 
-  const handleAudioError = (e: Event) => {
-    const target = e.target as HTMLAudioElement;
-    console.error("Audio error:", target.error);
-    setError("Error al cargar el audio. Por favor, intenta de nuevo más tarde.");
-    setIsLoading(false);
-    toast.error("Error al cargar el audio. Por favor, intenta de nuevo más tarde.");
-  };
-
   return (
     <section id="radio-ad" className="py-16 bg-impacto-light">
       <div className="container mx-auto px-4">
@@ -105,10 +86,6 @@ const RadioAdvertisement: React.FC = () => {
         </div>
 
         <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
-          {error ? (
-            <div className="text-red-500 mb-4 p-2 bg-red-50 rounded">{error}</div>
-          ) : null}
-          
           <div className="flex items-center gap-4 mb-3">
             <Button 
               onClick={togglePlayPause} 
@@ -143,17 +120,6 @@ const RadioAdvertisement: React.FC = () => {
 
           <div className="w-full">
             <Progress value={progress} className="h-2 bg-gray-200" />
-          </div>
-          
-          <div className="mt-4 text-center">
-            <a 
-              href="https://youtu.be/phpZNL9RZ4Q" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm text-impacto-red hover:underline"
-            >
-              Ver video completo en YouTube
-            </a>
           </div>
         </div>
       </div>

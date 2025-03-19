@@ -6,6 +6,7 @@ import ProductGrid from '@/components/ProductGrid';
 import Footer from '@/components/Footer';
 import BrandIdentity from '@/components/BrandIdentity';
 import RadioAdvertisement from '@/components/RadioAdvertisement';
+import VideoAdvertisement from '@/components/VideoAdvertisement';
 import { products, getProductsByCategory } from '@/data/products';
 import { Hand, Award, Shield, Zap } from 'lucide-react';
 
@@ -51,6 +52,9 @@ const Index = () => {
 
       {/* Radio Advertisement Section */}
       <RadioAdvertisement />
+
+      {/* Video Advertisement Section */}
+      <VideoAdvertisement />
 
       {/* About Section */}
       <section id="about" className="py-20 bg-impacto-light">
